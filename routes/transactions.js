@@ -15,13 +15,18 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 
   const { value, data } = req.body;
-  const transaction = new Transactions({ value, data });
-  transaction.save()
+  const newtransaction = new Transactions({ value, data });
+  newtransaction.save()
     .then(result => {
       res.status(200).json(result);
     })
     .catch(err => {
-      res.status(500).json({ message: err.message });
+      if (typeof (err.errors.value.value) == "string") {
+        res.status(400).json({ message: "مقدار نمیتواند از نوع رشته باشد" });
+      } else {
+        res.status(500).json({ message: err.message });
+      }
+
     });
 
 });
