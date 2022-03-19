@@ -44,7 +44,7 @@
     <div >
         {t.value}
     </div>
-    <button on:click={deleteValue(t._id)}>delete</button>
+    <button on:click={() => deleteValue(t._id)}>delete</button>
     {/each}
 
 
