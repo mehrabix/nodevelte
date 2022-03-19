@@ -24,6 +24,18 @@
          });
         })
     }
+    const deleteValue = (id) => {
+        fetch('/api/transactions/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res) =>{
+            fetch('/api/transactions').then(res => res.json()).then(data => {
+             transactions = data;
+         });
+        })
+    }
 
 </script>
 
@@ -32,6 +44,7 @@
     <div >
         {t.value}
     </div>
+    <button on:click={deleteValue(t._id)}>delete</button>
     {/each}
 
 
