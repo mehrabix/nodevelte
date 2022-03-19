@@ -12,6 +12,7 @@ router.get("/", async (req, res) => {
   })
 
 });
+
 router.post("/", async (req, res) => {
 
   const { value, data } = req.body;
@@ -21,12 +22,13 @@ router.post("/", async (req, res) => {
       res.status(200).json(result);
     })
     .catch(err => {
-      if (typeof (err.errors.value.value) == "string") {
-        res.status(400).json({ message: "مقدار نمیتواند از نوع رشته باشد" });
-      } else {
-        res.status(500).json({ message: err.message });
+      switch (typeof (err.errors.value.value)) {
+        case "string":
+          res.status(400).json({ message: 'مقدار نمیتواند از نوع رشته باشد' });
+          break;
+        default:
+          res.status(400).json({ message: 'مقدار نمیتواند خالی باشد' });
       }
-
     });
 
 });
