@@ -4,7 +4,7 @@
 
     let transactions = [];
     let inputValue = "";
-    $: addButtonDisabled = 3;
+    $: addButtonDisabled = inputValue.length === 0;
     onMount(() => {
         fetch("/api/transactions")
             .then((res) => res.json())
