@@ -68,7 +68,7 @@
         on:click={addValue}>add</button
     >
     {#each transactions as t}
-        <div transition:slide class="flex items-center justify-between gap-x-5 mt-6">
+        <div transition:slide={{duration:1000}} class="flex items-center justify-between gap-x-5 mt-6">
             <div class="badge badge-primary">
                 {t.value}
             </div>
