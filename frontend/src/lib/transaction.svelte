@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import "../app.css";
+    import {slide} from 'svelte/transition';
     let transactions = [];
     let inputValue = "";
     let valueDeleted = false;
@@ -67,7 +68,7 @@
         on:click={addValue}>add</button
     >
     {#each transactions as t}
-        <div class="flex items-center justify-between gap-x-5 mt-6">
+        <div transition:slide class="flex items-center justify-between gap-x-5 mt-6">
             <div class="badge badge-primary">
                 {t.value}
             </div>
