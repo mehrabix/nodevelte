@@ -7,7 +7,7 @@ const morgan = require('morgan')
 const {port,mongoURI} =require('./config.js')
 const transactionsRoutes = require('./routes/transactions')
 
-app.use(cors())
+app.use(cors()) 
 app.use(bodyParser.json())
 app.use(morgan('tiny'))
 
