@@ -1,10 +1,9 @@
 <script>
     import { onMount } from "svelte";
     import "./app.css";
-
     let transactions = [];
     let inputValue = "";
-    $: addButtonDisabled = inputValue.length === 0;
+    $: isButtonDisabled = inputValue.length === 0;
     onMount(() => {
         fetch("/api/transactions")
             .then((res) => res.json())
@@ -23,13 +22,12 @@
             },
             body: JSON.stringify(obj),
         }).then((res) => {
-            console.log(res);
-            console.log(res.status);
             fetch("/api/transactions")
                 .then((res) => res.json())
                 .then((data) => {
                     transactions = data;
                 });
+                inputValue = "";
         });
     };
     const deleteValue = (id) => {
@@ -55,7 +53,7 @@
         type="text"
         placeholder="something..."
     />
-    <button disabled={addButtonDisabled} class="btn btn-success mt-5" on:click={addValue}>add</button>
+    <button disabled={isButtonDisabled} class="btn btn-success mt-5" on:click={addValue}>add</button>
     {#each transactions as t}
         <div class="flex items-center justify-between gap-x-5 mt-6">
             <div class="badge badge-primary">
